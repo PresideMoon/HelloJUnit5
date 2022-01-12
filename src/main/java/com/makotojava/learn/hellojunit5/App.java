@@ -37,7 +37,7 @@ public class App {
    */
   public long add(long[] operands) {
     // Compute the sum
-    long ret = Long.MIN_VALUE;
+    long ret = 0;
     // TDD - add this once we run all the unit tests.
     //
     // TODO: As an exercise, implement this method so that all of the unit tests
@@ -45,6 +45,9 @@ public class App {
     //
     // Hint: if you get stuck, look at the {@link com.makotojava.learn.hellojunit5.solution.App App class}
     //
+    for (int i = 0; i < operands.length; i++){
+      ret += operands[i];
+    }
     return ret;
   }
 }
