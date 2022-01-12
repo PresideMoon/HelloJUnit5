@@ -2,6 +2,11 @@ package com.makotojava.learn.hellojunit5;
 
 import static org.junit.jupiter.api.Assertions.fail;
 
+import static org.junit.jupiter.api.Assertions.assertAll;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
@@ -32,20 +37,29 @@ public class JUnit5AppTest {
   // Create a JDK Logger here
 
   // Create a fixture for the class under test
-
+  public static App app;
   // Do something before ANY test is run in this class
+  @BeforeAll
   public static void init() {
   }
-
+  
   // Do something after ALL tests in this class are run
+  @AfterAll
   public static void done() {
   }
-
+  
   // Create an instance of the test class before each @Test method is executed
-
+  
+  @BeforeEach
+  public void setup(){
+    app = new App();
+  }
   // Destroy reference to the instance of the test class after each @Test method is executed
 
   // Disabled test
+  @Test
+  @Disabled
+  @DisplayName("A disabled test")
   void testNotRun() {
   }
 
@@ -66,12 +80,30 @@ public class JUnit5AppTest {
    * {@link org.junit.jupiter.api.Assertions#assertAll(org.junit.jupiter.api.function.Executable...) assertAll()}
    * </ol>
    */
+  @Test
+  @DisplayName("Add Sums 1,2,3,4")
   public void testAdd() {
+    assertNotNull(app);
     //
-    // EXERCISE: TODO: ADD CODE HERE (See Javadoc comments for instructions. Use the Javadoc View in Eclipse to see the
-    // buttery smooth javadoc above.)
+    assertAll(
+      () -> {
+        long list1[] = new long[]{1,2,3,4};
+        assertEquals(10, app.add(list1));
+
+      },
+      () -> {
+        long list2[] = new long[]{20,934,110};
+        assertEquals(1064, app.add(list2));
+
+      }, 
+      () -> {
+        long list3[] = new long[]{2,4,6};
+        assertEquals(12, app.add(list3));
+
+      }
+    );
     //
-    fail("Test not implemented!");
+    //fail("Test not implemented!");
   }
 
   /**
